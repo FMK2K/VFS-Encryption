@@ -21,9 +21,8 @@ The Vigenère encryption algorithm uses a keyword to shift the letters of the pl
 
 ## Contributors
 
-- [Your Name]
-- [Collaborator's Name]
-- [Collaborator's Name]
+- Feisal Kiiru(myself)
+- Lillian Pentecost(proffesor)
 
 ## How to Run
 
