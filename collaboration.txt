@@ -1,0 +1,34 @@
+[This is a template for your project collaboration document.  Please briefly answer the following questions in whatever format you'd lik. Try to stay within 500 words unless there is an issue/bug requiring additional explanation.]
+
+(1) Who did you collaborate with or recieve help/insight from during this project, and how did they help?
+    David K, assisted me in answering part 6 and in addressing bugs
+(2) What went well for you in this project?
+    I feel I understood the task and how to implement my ideas to acomplish the task fairly well this time
+(3) What was challenging for you in this project?
+
+(4) Did you consult any online sources in developing the code you are submitting?  Please list any sources and how/why you used them.  Note that any code or bug-fixes directly used in your code should be well-commented *by you* to indicate your understanding.
+    No oustside sources aside from a text explanation of the vigenere cipher on https://www.geeksforgeeks.org/vigenere-cipher/
+----------------------------------------------PART 6-----------------------------------------------------------
+1. Do inodes for regular files have different format or properties than inodes for directories? Explain your answer.
+   Yes, inodes for regular files and directories have distinct formats and properties. By definition, Inodes store metadata about file system objects. For regular files, additional metadata such as data block pointers and file size, but not filename/data, is stored within the inode to locate and access the file's data efficiently. Directory inodes contain these file names and function as files containing entries that map filenames to specific inode numbers. 
+
+2. What would it mean for two image files' inodes to have the same file pointer value? Do you think this situation should be possible in a file system? Why or why not?
+   If the inodes of two image files have the same file pointer value, it indicates that they point to the same place or data blocks on the disk. This might happen if one file is a copy of the other. 
+Given that having the same inode pointer value for different files can be purposeful it should very much be possible, and it is because Unix-based file systems there employ this in the form of Hard Links, a hard link is a directory entry that links to the same inode as another.
+
+3. How many inodes would be accessed / checked in order to retrieve the first byte of the file /home/lpentecost/cutestdog/mipha/mipha.jpg?
+   - To retrieve the first byte of the file `/home/lpentecost/cutestdog/mipha/mipha.jpg`, several inodes would need to be accessed:
+     - Inode for the root directory `/` (to access `home` directory)
+     - Inode for `home` directory (to access `lpentecost` directory)
+     - Inode for `lpentecost` directory (to access `cutestdog` directory)
+     - Inode for `cutestdog` directory (to access `mipha` directory)
+     - Inode for `mipha` directory (to access `mipha.jpg` file)
+     - Inode for `mipha.jpg` file (to retrieve file data)
+   - Therefore, a total of 6 inodes would typically be accessed or checked in this scenario.
+
+4. Given just an individual file name (e.g., mipha.jpg), how might you search the file system to locate the requested file? How efficiently can you find the requested file without the full path, and can you identify it uniquely?
+   - To locate the file `mipha.jpg` without the full path:
+     - Start from the root directory (`/`) and recursively search through directories.
+     - Access each directory's inode to check for the existence of the file name (`mipha.jpg`) within directory entries.
+     - Identify the inode corresponding to `mipha.jpg` once found.
+ But the efficiency of this depends on the size and complexity of the file system hierarchy. Without the full path, file uniqueness can be determined within a specific directory context. However, uniqueness across the entire file system requires considering all potential directories. 
